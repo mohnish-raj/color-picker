@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="style.css" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" id="theme-stylesheet" />
+  <title> Color picker remake </title>
+  <script>
+    
+  </script>
+</head>
+
+<body>
+  <div id="loader"></div>
+  
+  <nav id="menu-wrapper" class="collection">
+    <div id="collection">
+      <div id="collection-colors">
+        <header>
+          <button id="collection-close" class="btn btn-close"></button>
+          <h1 id="collection-title">
+            No of colors in this collection : <span id="no-of-colors">0</span>
+          </h1>
+        </header>
+        <div id="saved-colors">
+          <div id="selection">
+            <span id="select-all" class="ripple-effect">Select All</span>
+            <span>Selected : <span id="num-selected">0</span></span>
+          </div>
+        </div>
+        <footer id="saved-colors-options">
+          <ul id="options-list">
+            <li id="delete-all" class="ripple-effect ripple-lg">Delete</li>
+            <li id="add-fav" class="ripple-effect ripple-lg">Add to Favourites</li>
+            <li id="copy-all" class="ripple-effect ripple-lg">Copy</li>
+          </ul>
+        </footer>
+      </div>
+    </div>
+    <button id="menu-btn" class="btn">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+    <div id="menu">
+      <ul id="menu-list">
+        <li id="open-collection" class="ripple-effect ripple-lg">
+          Collection
+        </li>
+        <li id="open-settings" class="ripple-effect ripple-lg">
+          Settings
+        </li>
+        <li id="open-favourites" class="ripple-effect ripple-lg">
+          Favourites
+        </li>
+      </ul>
+    </div>
+  </nav>
+  
+  <section class="card" id="colorpad-wrapper">
+    <div id="colorpad"></div>
+  </section>
+  
+  <section id="controls">
+    <div class="card" id="results">
+      <div>
+        <span id="labels">
+          <label for="hex-value">Hex value : </label>
+          <label for="rgb-value">RGB value : </label>
+          <label for="hsl-value">HSL value : </label>
+        </span>
+        <span id="values">
+          <input readonly="readonly" id="hex-value" class="result-value input-field" value="#ffffff" />
+          <input readonly="readonly" id="rgb-value" class="result-value input-field" value="rgb(255, 255, 255)" />
+          <input readonly="readonly" id="hsl-value" class="result-value input-field" value="hsl(0, 0%, 100%)" />
+        </span>
+        <span id="copy-btns">
+          <button class="btn btn-copy btn-copy-hex ripple-effect" id="copy-hex">copy</button>
+          <button class="btn btn-copy btn-copy-rgb ripple-effect" id="copy-rgb">copy</button>
+          <button class="btn btn-copy btn-copy-hsl ripple-effect" id="copy-hsl">copy</button>
+        </span>
+      </div>
+      <div class="btns">
+        <button class="btn ripple-effect" id="add-color">+</button>
+        <button class="btn ripple-effect" id="random">Random</button>
+      </div>
+    </div>
+    <div id="set-color">
+      <div class="card" id="range-inputs">
+        <span>
+          <label for="value-red" class="label-rgb">R</label>
+          <button class="btn ripple-effect btn-dec"></button>
+          <input type="range" class="slider" id="slider-red" data-bg="#ff0050" />
+          <button class="btn ripple-effect btn-inc"></button>
+        </span>
+        <span>
+          <label for="value-green" class="label-rgb">G</label>
+          <button class="btn ripple-effect btn-dec"></button>
+          <input type="range" class="slider" id="slider-green" data-bg="#00a100" />
+          <button class="btn ripple-effect btn-inc"></button>
+        </span>
+        <span>
+          <label for="value-blue" class="label-rgb">B</label>
+          <button class="btn ripple-effect btn-dec"></button>
+          <input type="range" class="slider" id="slider-blue" data-bg="#4029ff" />
+          <button class="btn ripple-effect btn-inc"></button>
+        </span>
+      </div>
+      <div class="card" id="user-input">
+        <label for="enter-value">Enter valid color value : </label>
+        <span>
+          <input id="enter-value" class="input-field input-focus" />
+        </span>
+      </div>
+    </div>
+  </section>
+  
+  <section id="settings">
+    <header id="settings-header">
+      <span id="settings-title" class="title">
+        Settings
+      </span>
+      <button class="btn btn-close" id="close-settings"></button>
+    </header>
+    <ul id="settings-list">
+      <li class="ripple-effect ripple-lg">
+        <label for="input-hold-len">Hold length :</label>
+        <input id="input-hold-len" type="number" value="1000" class="input-field input-focus" />
+        ms
+      </li>
+      <li class="ripple-effect ripple-lg" id="li-randomize">
+        <label for="chk-randomize">Generate random color on load :
+          <input type="checkbox" class="checkbox switch" id="chk-randomize" />
+        </label>
+      </li>
+      <li class="select-box-wrapper ripple-effect ripple-lg">
+        Copy color mode :
+        <span class="arrow-icon"></span>
+      </li>
+      <ul id="themes-wrapper" class="select-box-list">
+        <li class="ripple-effect ripple-lg radio-with-text">
+          <input type="radio" name="color-mode" id="mode-hex" class="radio-btn" />
+          <label for="mode-hex" class="radio-label">
+            Hex
+          </label>
+        </li>
+        <li class="ripple-effect ripple-lg radio-with-text">
+          <input type="radio" name="color-mode" id="mode-rgb" class="radio-btn" />
+          <label for="mode-rgb" class="radio-label">
+            RGB
+          </label>
+        </li>
+        <li class="ripple-effect ripple-lg radio-with-text">
+          <input type="radio" name="color-mode" id="mode-hsl" class="radio-btn" />
+          <label for="mode-hsl" class="radio-label">
+            HSL
+          </label>
+        </li>
+      </ul>
+      <li id="select-themes" class="select-box-wrapper ripple-effect ripple-lg">
+        Theme
+        <span class="arrow-icon"></span>
+      </li>
+      <ul id="themes-wrapper" class="select-box-list">
+        <li class="ripple-effect ripple-lg radio-with-text">
+          <input type="radio" name="theme" id="theme-light" class="radio-btn">
+          <label for="theme-light" class="radio-label">Light</label>
+        </li>
+        <li class="ripple-effect ripple-lg radio-with-text">
+          <input type="radio" name="theme" id="theme-dark" class="radio-btn">
+          <label for="theme-dark" class="radio-label">Dark</label>
+        </li>
+      </ul>
+    </ul>
+    <footer id="settings-footer">
+      <button id="reset-settings" class="btn ripple-effect">Reset</button>
+      <button id="save-options" class="btn ripple-effect">Save</button>
+    </footer>
+  </section>
+  
+  <section id="favourites">
+    <header id="fav-header">
+      <span class="title" id="fav-title">Favourites</span>
+      <button class="btn btn-close" id="close-favourites"></button>
+    </header>
+    <div id="fav-colors"></div>
+  </section>
+  
+  <!-- Modals -->
+  <div class="modal" id="already-present">
+    <div class="modal-box">
+      <header class="modal-header">
+        <span class="modal-title">
+          Already present !
+        </span>
+        <button class="btn btn-close-modal"></button>
+      </header>
+      <div class="modal-body">
+        <div class="modal-description">
+          This color is already present in your collection !
+        </div>
+      </div>
+      <footer class="modal-footer">
+        <div class="modal-btns">
+          <button class="accept-modal ripple-effect btn">Ok</button>
+        </div>
+      </footer>
+    </div>
+  </div>
+  
+  <div class="modal" id="clear-collection">
+    <div class="modal-box">
+      <header class="modal-header">
+        <span class="modal-title">
+          Are you sure ?
+        </span>
+        <button class="btn btn-close-modal"></button>
+      </header>
+      <div class="modal-body">
+        <div class="modal-description">
+          Do you really want to delete the selected colors ?
+        </div>
+      </div>
+      <footer class="modal-footer">
+        <div class="modal-btns">
+          <button class="accept-modal ripple-effect btn" id="clear-sure">Sure</button>
+          <button class="reject-modal ripple-effect btn">Cancel</button>
+        </div>
+      </footer>
+    </div>
+  </div>
+  
+  <div class="modal" id="copy-colors">
+    <div class="modal-box">
+      <header class="modal-header">
+        <span class="modal-title">
+          Colors :
+        </span>
+        <button class="btn btn-close-modal"></button>
+      </header>
+      <div class="modal-body">
+        <div class="modal-description">
+          <textarea id="copy-color-values" cols="30" rows="10" class="input-field txt-area" readonly="readonly"></textarea>
+        </div>
+      </div>
+      <footer class="modal-footer">
+        <div class="modal-btns">
+          <button class="accept-modal ripple-effect btn" id="copy-sure">Copy</button>
+          <button class="reject-modal ripple-effect btn">Cancel</button>
+        </div>
+      </footer>
+    </div>
+  </div>
+  
+  <div class="modal" id="reset-settings-modal">
+    <div class="modal-box">
+      <header class="modal-header">
+        <span class="modal-title">
+          Reset Settings ?
+        </span>
+        <button class="btn btn-close-modal"></button>
+      </header>
+      <div class="modal-body">
+        <div class="modal-description">
+          Are you sure you want to reset the settings to default ?
+        </div>
+      </div>
+      <footer class="modal-footer">
+        <div class="modal-btns">
+          <button class="accept-modal ripple-effect btn" id="reset-sure">Reset</button>
+          <button class="reject-modal ripple-effect btn">Cancel</button>
+        </div>
+      </footer>
+    </div>
+  </div>
+  
+  <!-- Toasts -->
+  <section class="toasts">
+    <span class="toast" id="toast-added-coll">Added to collection</span>
+    <span class="toast" id="toast-added-fav">Added to Favourites</span>
+    <span class="toast" id="toast-deleted">Deleted</span>
+    <span class="toast" id="toast-copied">Copied</span>
+  </section>
+  
+  <script src="main.js"></script>
+  <script src="Themes/js/theme1.js"></script>
+</body>
+
+</html>
